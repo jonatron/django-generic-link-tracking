@@ -1,18 +1,23 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 import numconv
 
 
 class GenericLink(models.Model):
     where = models.CharField(max_length=200, blank=True, default="")
-    url = models.CharField(max_length=255, blank=True)
+    url = models.URLField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     show_in_admin = models.BooleanField(default=True)
     rotate = models.CharField(max_length=100, blank=True)  # comma separated IDs
 
-    content_type = models.ForeignKey(ContentType, null=True)
-    object_id = models.PositiveIntegerField(null=True)
+    content_type = models.ForeignKey(ContentType, null=True, blank=True)
+    object_id = models.PositiveIntegerField(null=True, blank=True)
     content_object = GenericForeignKey('content_type', 'object_id')
+
+    def __unicode__(self):
+        return self.url
 
     def get_link(self):
         quick_id = numconv.int2str(int(self.id), 32, numconv.BASE32)
@@ -21,7 +26,8 @@ class GenericLink(models.Model):
     def get_full_url(self):
         return settings.DOMAIN + self.get_link()
 
-    def get_click_count(self):
+    @property
+    def click_count(self):
         return GenericLinkClick.objects.filter(link=self).count()
 
 

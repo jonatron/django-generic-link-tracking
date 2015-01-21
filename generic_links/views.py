@@ -1,11 +1,25 @@
+import numconv
 from django.shortcuts import render, redirect
+from django.http import Http404
+from .models import GenericLink, GenericLinkClick
+
+
+def get_ip(request):
+    ip = 0
+    if request.META.get('HTTP_X_REAL_IP', False):
+        ip = request.META['HTTP_X_REAL_IP']
+    elif request.META.get('HTTP_X_FORWARDED_FOR', False):
+        ip = request.META['HTTP_X_FORWARDED_FOR']
+    elif request.META.get('REMOTE_ADDR', False):
+        ip = request.META['REMOTE_ADDR']
+    return ip
+
 
 def generic_link_click(request, quick_id):
     id = numconv.str2int(quick_id.upper(), 32, numconv.BASE32)
-
     try:
         gl = GenericLink.objects.get(pk=id)
-    except:
+    except GenericLink.DoesNotExist:
         raise Http404
 
     if gl.rotate:
