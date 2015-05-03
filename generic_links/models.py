@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
+from django.utils.html import mark_safe
 import numconv
 
 
@@ -22,6 +23,10 @@ class GenericLink(models.Model):
     def get_link(self):
         quick_id = numconv.int2str(int(self.id), 32, numconv.BASE32)
         return "/glc/%s/" % quick_id
+
+    def link(self):
+        link = self.get_link()
+        return mark_safe("<a href='%s'>%s</a>" % (link, link))
 
     def get_full_url(self):
         return settings.DOMAIN + self.get_link()
