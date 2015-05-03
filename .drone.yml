@@ -1,4 +1,0 @@
-image: python2.7
-script:
-    - pip install tox
-    - tox
