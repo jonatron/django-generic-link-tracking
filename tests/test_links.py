@@ -61,7 +61,7 @@ def test_rotation(client):
     gl3 = GenericLink()
     gl3.where = 'there'
     gl3.url = 'http://www.bing.com'  # someone somewhere uses it, presumably
-    gl3.rotate = unicode("%s,%s" % (gl.id, gl2.id))
+    gl3.rotate = "%s,%s" % (gl.id, gl2.id)
     gl3.save()
 
     response_urls = []
