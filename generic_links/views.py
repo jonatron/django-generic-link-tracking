@@ -2,6 +2,7 @@ import numconv
 from django.shortcuts import render, redirect
 from django.http import Http404
 from .models import GenericLink, GenericLinkClick
+from random import randint
 
 
 def get_ip(request):

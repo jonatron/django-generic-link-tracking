@@ -1,7 +1,11 @@
 from django.db import models
-from django.contrib.contenttypes.fields import GenericForeignKey
+try:
+    from django.contrib.contenttypes.fields import GenericForeignKey
+except ImportError:
+    from django.contrib.contenttypes.generic import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
+from django.utils.html import mark_safe
 import numconv
 
 
@@ -23,6 +27,10 @@ class GenericLink(models.Model):
         quick_id = numconv.int2str(int(self.id), 32, numconv.BASE32)
         return "/glc/%s/" % quick_id
 
+    def link(self):
+        link = self.get_link()
+        return mark_safe("<a href='%s'>%s</a>" % (link, link))
+
     def get_full_url(self):
         return settings.DOMAIN + self.get_link()
 
@@ -33,5 +41,5 @@ class GenericLink(models.Model):
 
 class GenericLinkClick(models.Model):
     link = models.ForeignKey('GenericLink')
-    ip = models.IPAddressField()
+    ip = models.GenericIPAddressField()
     created = models.DateTimeField(auto_now_add=True)
