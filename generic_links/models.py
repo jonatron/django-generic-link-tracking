@@ -41,5 +41,5 @@ class GenericLink(models.Model):
 
 class GenericLinkClick(models.Model):
     link = models.ForeignKey('GenericLink')
-    ip = models.IPAddressField()
+    ip = models.GenericIPAddressField()
     created = models.DateTimeField(auto_now_add=True)
