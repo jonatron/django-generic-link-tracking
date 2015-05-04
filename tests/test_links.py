@@ -1,5 +1,5 @@
 from .models import Foo
-from generic_links.models import GenericLink
+from generic_link_tracking.models import GenericLink
 
 import pytest
 import time

@@ -41,7 +41,7 @@ def pytest_configure():
             'django.contrib.messages',
             'django.contrib.staticfiles',
 
-            'generic_links',
+            'generic_link_tracking',
             'tests',
         ),
         PASSWORD_HASHERS=(

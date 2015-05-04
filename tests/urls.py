@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = patterns('',
-    url(r'', include('generic_links.urls', namespace='generic_links')),
+    url(r'', include('generic_link_tracking.urls', namespace='generic_link_tracking')),
 )
 
 if settings.DEBUG:
