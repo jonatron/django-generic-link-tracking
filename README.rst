@@ -1,8 +1,8 @@
-django_generic_links
-====================
+django-generic-link-tracking
+============================
 
-.. image:: https://drone.io/github.com/jonatron/django_generic_links/status.png
-   :target: https://drone.io/github.com/jonatron/django_generic_links/latest
+.. image:: https://drone.io/github.com/jonatron/django-generic-link-tracking/status.png
+   :target: https://drone.io/github.com/jonatron/django-generic-link-tracking/latest
    :alt: Coverage Status
 
 Tiny django app to provide trackable links with a short URL.
@@ -10,8 +10,8 @@ Tiny django app to provide trackable links with a short URL.
 Installation
 ------------
 
-* pip install django_generic_links
-* Add ``admin_resumable`` to your ``INSTALLED_APPS``
+* pip install django-generic-link-tracking
+* Add ``generic_link_tracking`` to your ``INSTALLED_APPS``
 
 
 Compatibility
